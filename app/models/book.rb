@@ -1,4 +1,6 @@
 class Book < ActiveRecord::Base
+  has_many :book_genres
+  has_many :genres, through: :book_genres
   
   scope :finished, ->{ where.not(finished_on: nil) }
   scope :search, ->(keyword){ where( 'keywords LIKE?', "%#{keyword.downcase}%") if keyword.present? }
